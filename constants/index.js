@@ -1,0 +1,1 @@
+module.exports.characters = [ {id: 1, name: "test", color: "test"}];
