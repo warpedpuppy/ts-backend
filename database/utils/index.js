@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
-const Config = require('../../config')
+const Config = require('../../config');
+const CharacterModel = require('../models/characterModel');
+const uuid = require('uuid');
+
 module.exports.connection = async () => {
   try {
     mongoose.set('debug', true);
@@ -11,3 +14,14 @@ module.exports.connection = async () => {
   }
 }
 
+async function addStarterData() {
+  try {
+    const testStarter = "starter";
+    let result = CharacterModel.find({name: testStarter});
+    if (!result) {
+      CharacterModel.create({name: testStarter, color: "#990000", id: uuid.v4()})
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
