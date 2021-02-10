@@ -7,10 +7,12 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors());
-const CharacterModel = require('./database/models/characterModel');
+// const CharacterModel = require('./database/models/characterModel');
 const { connection } = require('./database/utils/');
-const resolvers = require('./resolvers');
+
 const typeDefs = require('./typeDefs');
+const resolvers = require('./resolvers');
+
 
 connection();
 

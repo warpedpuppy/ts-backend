@@ -1,7 +1,6 @@
 const { gql } = require('apollo-server-express');
 
 const characterTypeDefs = require('./characters');
-
 const typeDefs = gql`
   scalar Date
 

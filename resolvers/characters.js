@@ -14,7 +14,32 @@ module.exports = {
         } catch (e) {
           console.error(e)
         }
-       
+      },
+      deleteCharacter: async (_, args) => {
+        try {
+          const { id } = args.input;
+          let result = await CharacterModel.deleteOne({_id: id})
+          return result;
+        } catch (e) {
+          console.error(e)
+        }
+      },
+      updateCharacter: async (_, args) => {
+        try {
+          const {id, name, color } = args.input;
+          let result = await CharacterModel.findByIdAndUpdate({_id: id}, {name, color}, {new: true})
+          return result
+        } catch (e) {
+          console.error(e)
+        }
+      },
+      deleteAllCharacters: async (_, args) => {
+        try {
+          let result = await CharacterModel.remove({})
+          return result ? true : false ;
+        } catch (e) {
+          console.error(e)
+        }
       }
     } 
   }
