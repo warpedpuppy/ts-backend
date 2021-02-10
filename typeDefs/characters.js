@@ -28,7 +28,7 @@ module.exports = gql`
   type Mutation {
     createCharacter(input: createCharacterInput!): Character
     updateCharacter(input: updateCharacterInput!): Character
-    deleteCharacter(input: deleteCharacterInput!): Character
+    deleteCharacter(input: deleteCharacterInput!): [Character!]
     deleteAllCharacters(input: deleteAllCharacterInput!): Boolean
   }
 `;

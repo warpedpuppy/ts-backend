@@ -18,8 +18,10 @@ module.exports = {
       deleteCharacter: async (_, args) => {
         try {
           const { id } = args.input;
+          console.log("delete = ", id)
           let result = await CharacterModel.deleteOne({_id: id})
-          return result;
+          let result2 = result ? await CharacterModel.find() : [] ; 
+          return result2;
         } catch (e) {
           console.error(e)
         }
