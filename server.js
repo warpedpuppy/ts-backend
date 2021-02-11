@@ -1,26 +1,32 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-const helmet = require('helmet');
-const app = express();
-// const TestModel = require('./models/testModel')
-const Config = require('./config');
+
+const { ApolloServer, gql } = require('apollo-server-express');
 const cors = require('cors');
+require('dotenv').config();
+const app = express();
+app.use(express.json());
+app.use(cors());
+const MongoRestfulRouter = require('./mongo-restful/mongo-restful-routes');
+const { connection } = require('./database/utils');
 
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
 
-app.use(helmet());
-app.use(cors);
+app.use('/mongo-restful', MongoRestfulRouter);
 
-mongoose.connect(Config.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true })
-.catch(error => console.error(error));
+connection();
 
-// TestModel.find()
-// .then(result => console.log(result))
+const apolloServer = new ApolloServer({
+  typeDefs,
+  resolvers
+});
 
-// app.use('/create', (req, res) => {
-//     TestModel.create({name: "test", size: "test"})
-// .then(result => console.log(result))
-// })
+apolloServer.applyMiddleware({ app, path: '/graphql' });
 
+const PORT = process.env.PORT || 8080;
 
-app.listen(Config.PORT, () => console.log(`listening to ${Config.PORT}`))
+app.listen(PORT, () => {
+  console.log(`Server listening on PORT: ${PORT}`);
+  console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
+});

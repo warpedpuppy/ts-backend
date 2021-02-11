@@ -26,10 +26,9 @@ module.exports = gql`
     color: String!
   }
   type Mutation {
-    createCharacter(input: createCharacterInput!): Character
-    updateCharacter(input: updateCharacterInput!): Character
+    createCharacter(input: createCharacterInput!): [Character!]
+    updateCharacter(input: updateCharacterInput!): [Character!]
     deleteCharacter(input: deleteCharacterInput!): [Character!]
     deleteAllCharacters(input: deleteAllCharacterInput!): Boolean
   }
 `;
-// should 'extend' be before Query and Mutation?
