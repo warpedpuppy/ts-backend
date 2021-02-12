@@ -2,6 +2,9 @@ const express = require('express');
 const MongoRestfulRouter = express.Router();
 const MongoRestfulServices = require('./mongo-restful-services');
 MongoRestfulRouter
+.get('/test', async (req, res) => {
+    res.status(200).json({success: true})
+})
 .get('/', async (req, res) => {
     try {
         let result2 =  await MongoRestfulServices.getAll();
