@@ -6,7 +6,7 @@ const uuid = require('uuid');
 module.exports.connection = async () => {
   try {
     mongoose.set('debug', true);
-    await mongoose.connect(Config.LOCAL_MONGO_DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+    await mongoose.connect(Config.MONGO_REMOTE, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('Database Connected Successfully');
   } catch (error) {
     console.log(error);
