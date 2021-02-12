@@ -9,8 +9,8 @@ const PostgresQLServices = {
         },
     insertOne: function (db, obj) {
         return db.raw(`INSERT INTO characters (character_name, character_color) VALUES ('ethel', 'red');`);
-        // .insert(obj)
-        // .into('characters')
+        .insert(obj)
+        .into('characters')
     }
 }
 module.exports = PostgresQLServices;
