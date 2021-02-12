@@ -3,8 +3,13 @@ const PostgresQLRouter = express.Router();
 const PostgresQLServices = require('./postgresql-services');
 PostgresQLRouter
 .get('/', async (req, res) => {
-    let result = await PostgresQLServices.getAll(req.app.get('db'))
-    res.status(200).json({success: true, result})
+    try {
+        let result = await PostgresQLServices.getAll(req.app.get('db'))
+        res.status(200).json({success: true, result})
+    } catch (e) {
+        console.log(e)
+    }
+   
 })
 .post('/', async (req, res) => {
     try {

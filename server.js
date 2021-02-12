@@ -9,9 +9,6 @@ app.use(express.json());
 app.use(cors());
 
 
-
-
-
 const MongoRestfulRouter = require('./mongo-restful/mongo-restful-routes');
 const PostgresQLRouter = require('./postresql-restful/postgresql-router');
 const { connection } = require('./database/utils');
