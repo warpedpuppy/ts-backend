@@ -8,7 +8,7 @@ const PostgresQLServices = {
         .from('characters')
         },
     insertOne: function (db, obj) {
-        return db.raw(`INSERT INTO characters (character_name, character_color) VALUES ('ethel', 'red');`);
+        return db
         .insert(obj)
         .into('characters')
     }
