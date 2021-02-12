@@ -1,5 +1,15 @@
 const CharacterModel = require('../../database/models/characterModel');
 const uuid = require('uuid');
+const xss = require('xss');
+
+function  serialize(obj) {
+  return {
+    id: obj._id,
+    name: xss(obj.name),
+    color: xss(obj.color)
+  }
+}
+
 module.exports = {
     Query: {
       greetings: () => "hello",
@@ -10,8 +20,9 @@ module.exports = {
         try {
           const character = { name: args.input.name, color: args.input.color, id: uuid.v4()}
           let result = await CharacterModel.create(character)
-          let result2 = result ? await CharacterModel.find() : [] ; 
-          return result2;
+          let characters = result ? await CharacterModel.find() : [] ; 
+          console.log(characters, characters.map(character => serialize(character)))
+          return characters.map(character => serialize(character))
         } catch (e) {
           console.error(e)
         }
@@ -20,8 +31,8 @@ module.exports = {
         try {
           const { id } = args.input;
           let result = await CharacterModel.deleteOne({_id: id})
-          let result2 = result ? await CharacterModel.find() : [] ; 
-          return result2;
+          let characters = result ? await CharacterModel.find() : [] ; 
+          return characters.map(character => serialize(character));
         } catch (e) {
           console.error(e)
         }
@@ -30,8 +41,8 @@ module.exports = {
         try {
           const { id, name, color } = args.input;
           let result = await CharacterModel.findByIdAndUpdate({_id: id}, {name, color}, {new: true})
-          let result2 = result ? await CharacterModel.find() : [] ; 
-          return result2
+          let characters = result ? await CharacterModel.find() : [] ; 
+          return characters.map(character => serialize(character));
         } catch (e) {
           console.error(e)
         }
