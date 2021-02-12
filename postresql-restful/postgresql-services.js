@@ -2,11 +2,11 @@ const PostgresQLRouter = require("./postgresql-router")
 
 const xss = require('xss')
 const PostgresQLServices = {
-    getAll: function (db) {
-        return db
-        .select('*')
-        .from('characters')
-        },
+    getAll: async db => {
+        let result = await db.select('*').from('characters');
+        console.log(result)
+        return result;
+    },
     insertOne: function (db, obj) {
         return db
         .insert(obj)
