@@ -3,4 +3,5 @@ module.exports = {
     PORT: process.env.PORT || '',
     LOCAL_MONGO_DB_URL: process.env.LOCAL_MONGO_DB_URL || '',
     MONGO_REMOTE: process.env.MONGO_REMOTE || '',
+    ENVOLOPE: process.env.ENVOLOPE || 'local',
 }
