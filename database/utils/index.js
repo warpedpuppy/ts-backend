@@ -16,13 +16,13 @@ module.exports.connection = async () => {
 }
 
 async function addStarterData() {
-  try {
-    const testStarter = "starter";
-    let result = CharacterModel.find({name: testStarter});
-    if (!result) {
-      CharacterModel.create({name: testStarter, color: "#990000", id: uuid.v4()})
-    }
-  } catch (e) {
-    console.error(e);
-  }
+  // try {
+  //   const testStarter = "starter";
+  //   let result = CharacterModel.find({name: testStarter});
+  //   if (!result) {
+  //     CharacterModel.create({name: testStarter, color: "#990000", id: uuid.v4()})
+  //   }
+  // } catch (e) {
+  //   console.error(e);
+  // }
 }
