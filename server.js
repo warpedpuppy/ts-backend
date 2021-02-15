@@ -32,13 +32,30 @@ apolloServer.applyMiddleware({ app, path: '/graphql' });
 const PORT = process.env.PORT || 8080;
 
 //POSTGRESQL
-const knex = require('knex')
-const db = knex({
-  client: 'pg',
-  connection: process.env.POSTGRES_REMOTE,
-})
-app.set('db', db)
+try {
+  let postgres_connection = process.env.ENVELOPE === 'local' ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_REMOTE;
+  const knex = require('knex')
+  const db = knex({
+    client: 'pg',
+    connection: postgres_connection,
+  })
+
+  if (process.env.ENVELOPE === 'local') {
+    console.log(`connected to local posgresql db`)
+  } else {
+    console.log(`connected to remote posgresql db`)
+  }
+  app.set('db', db)
+} catch (e) {
+  if (process.env.ENVELOPE === 'local') {
+    console.log(`problem connecting to local posgresql db`)
+  } else {
+    console.log(`problem connecting to remote posgresql db`)
+  }
+}
+
+
 app.listen(PORT, () => {
-  console.log(`Server listening on PORT: ${PORT}`);
-  console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
+  //console.log(`Server listening on PORT: ${PORT}`);
+  //console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
 });
