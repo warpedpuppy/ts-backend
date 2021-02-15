@@ -9,7 +9,7 @@ module.exports.connection = async () => {
     await mongoose.connect(Config.MONGO_REMOTE, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('mongo remote database connected Successfully  .');
   } catch (error) {
-    console.log('mongo remote database could not connect  .');
+    console.log('mongo remote database could not connect    .');
     console.error(error);
     //throw error;
   }
