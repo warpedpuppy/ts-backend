@@ -28,6 +28,7 @@ app.use('/postresql-restful', PostgresQLRouter);
 async function startMongoose () {
   try {
     if (process.env.ENVOLOPE === 'local') mongoose.set('debug', true);
+    console.log(process.env.MONGO_REMOTE);
     await mongoose.connect(process.env.MONGO_REMOTE, { useNewUrlParser: true, useUnifiedTopology: true });
     console.log('mongo remote database connected successfully.');
   } catch (error) {
