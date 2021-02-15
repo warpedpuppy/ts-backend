@@ -48,9 +48,9 @@ try {
   app.set('db', db)
 } catch (e) {
   if (process.env.ENVELOPE === 'local') {
-    console.log(`problem connecting to local posgresql db.`)
+    console.log(`problem connecting to local posgresql db`)
   } else {
-    console.log(`problem connecting to remote posgresql db.`)
+    console.log(`problem connecting to remote posgresql db`)
   }
 }
 
