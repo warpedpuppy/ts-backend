@@ -11,7 +11,7 @@ app.use(cors());
 
 const MongoRestfulRouter = require('./mongo-restful/mongo-restful-routes');
 const PostgresQLRouter = require('./postresql-restful/postgresql-router');
-const { connection } = require('./database/utils');
+// const { connection } = require('./database/utils');
 
 const typeDefs = require('./graphql/typeDefs');
 const resolvers = require('./graphql/resolvers');
@@ -21,15 +21,33 @@ const resolvers = require('./graphql/resolvers');
 app.use('/mongo-restful', MongoRestfulRouter);
 app.use('/postresql-restful', PostgresQLRouter);
 
+
+
+
+//MONGODB
+async function startMongoose () {
+  try {
+    if (process.env.ENVOLOPE === 'local') mongoose.set('debug', true);
+    await mongoose.connect(process.env.MONGO_REMOTE, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log('mongo remote database connected successfully.');
+  } catch (error) {
+    console.log('mongo remote database could not connect.');
+    console.error(error);
+    //throw error;
+  }
+}
+startMongoose()
+
+
+
 //GRAPHQL
-connection();
 const apolloServer = new ApolloServer({
   typeDefs,
   resolvers
 });
 apolloServer.applyMiddleware({ app, path: '/graphql' });
 
-const PORT = process.env.PORT || 8080;
+
 
 //POSTGRESQL
 try {
@@ -55,6 +73,10 @@ try {
 }
 
 
+
+
+
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   //console.log(`Server listening on PORT: ${PORT}`);
   //console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
