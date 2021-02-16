@@ -1,4 +1,4 @@
-const CharacterModel = require('../database/models/characterModel');
+const CharacterModel = require('../models/characterModel');
 const xss = require('xss');
 
 const MongoRestfulServices = { 
