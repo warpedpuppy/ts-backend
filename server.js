@@ -21,7 +21,7 @@ app.use('/postresql-restful', PostgresQLRouter);
 
 
 startMongo();
-startGraphQL(app);
+let apolloServer = startGraphQL(app);
 startPostgres(app);
 
 
@@ -29,5 +29,5 @@ startPostgres(app);
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server listening on PORT: ${PORT}`);
-  //console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
+  console.log(`Graphql Endpoint: ${apolloServer.graphqlPath}`);
 });

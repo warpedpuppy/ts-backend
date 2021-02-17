@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const CharacterModel = new mongoose.Schema({
+  userid: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true

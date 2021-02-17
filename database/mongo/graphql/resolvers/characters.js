@@ -13,16 +13,15 @@ function  serialize(obj) {
 module.exports = {
     Query: {
       greetings: () => "hello",
-      characters: () => CharacterModel.find({})
+      characters: async (_, args) => {
+        return await CharacterModel.find({userid: args.input.userid})}
     },
     Mutation: {
       createCharacter: async (_, args) => {
         try {
-          const character = { name: args.input.name, color: args.input.color, id: uuid.v4()}
+          const character = { userid: args.input.userid, name: args.input.name, color: args.input.color, id: uuid.v4()}
           let result = await CharacterModel.create(character)
-          let characters = result ? await CharacterModel.find() : [] ; 
-          console.log(characters, characters.map(character => serialize(character)))
-          return characters.map(character => serialize(character))
+          return serialize(result);
         } catch (e) {
           console.error(e)
         }
@@ -31,8 +30,7 @@ module.exports = {
         try {
           const { id } = args.input;
           let result = await CharacterModel.deleteOne({_id: id})
-          let characters = result ? await CharacterModel.find() : [] ; 
-          return characters.map(character => serialize(character));
+          return serialize(result);
         } catch (e) {
           console.error(e)
         }
@@ -41,15 +39,14 @@ module.exports = {
         try {
           const { id, name, color } = args.input;
           let result = await CharacterModel.findByIdAndUpdate({_id: id}, {name, color}, {new: true})
-          let characters = result ? await CharacterModel.find() : [] ; 
-          return characters.map(character => serialize(character));
+          return serialize(result);
         } catch (e) {
           console.error(e)
         }
       },
       deleteAllCharacters: async (_, args) => {
         try {
-          let result = await CharacterModel.remove({})
+          let result = await CharacterModel.remove({userid: args.input.userid})
           return result ? true : false ;
         } catch (e) {
           console.error(e)
