@@ -5,11 +5,11 @@ const CharacterModel = new mongoose.Schema({
     type: String,
     required: true
   },
-  name: {
+  character_name: {
     type: String,
     required: true
   },
-  color: {
+  character_color: {
       type: String,
       required: true
     }

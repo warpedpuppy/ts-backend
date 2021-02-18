@@ -8,16 +8,18 @@ module.exports = gql`
   type Character {
     userid: String!
     id: ID!
-    name: String!
-    color: String!
+    character_name: String!
+    character_color: String!
+    createdAt: String!
+    updatedAt: String!
   }
   input UserID {
     userid: String!
   }
   input createCharacterInput {
     userid: String!
-    name: String!
-    color: String!
+    character_name: String!
+    character_color: String!
   }
   input deleteCharacterInput {
     id: ID!
@@ -28,13 +30,13 @@ module.exports = gql`
   }
   input updateCharacterInput {
     id: ID!
-    name: String!
-    color: String!
+    character_name: String!
+    character_color: String!
   }
   type Mutation {
     createCharacter(input: createCharacterInput!): Character!
-    updateCharacter(input: updateCharacterInput!): [Character!]
-    deleteCharacter(input: deleteCharacterInput!): [Character!]
+    updateCharacter(input: updateCharacterInput!): Character!
+    deleteCharacter(input: deleteCharacterInput!): Boolean!
     deleteAllCharacters(input: deleteAllCharacterInput!): Boolean
   }
 `;

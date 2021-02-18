@@ -5,8 +5,10 @@ const xss = require('xss');
 function  serialize(obj) {
   return {
     id: obj._id,
-    name: xss(obj.name),
-    color: xss(obj.color)
+    character_name: xss(obj.character_name),
+    character_color: xss(obj.character_color),
+    createdAt: xss(obj.createdAt),
+    updatedAt: xss(obj.updatedAt),
   }
 }
 
@@ -19,7 +21,7 @@ module.exports = {
     Mutation: {
       createCharacter: async (_, args) => {
         try {
-          const character = { userid: args.input.userid, name: args.input.name, color: args.input.color, id: uuid.v4()}
+          const character = { userid: args.input.userid, character_name: args.input.character_name, character_color: args.input.character_color, id: uuid.v4()}
           let result = await CharacterModel.create(character)
           return serialize(result);
         } catch (e) {
@@ -30,15 +32,16 @@ module.exports = {
         try {
           const { id } = args.input;
           let result = await CharacterModel.deleteOne({_id: id})
-          return serialize(result);
+          console.log(result)
+          return result.deletedCount > 0 ? true : false;
         } catch (e) {
           console.error(e)
         }
       },
       updateCharacter: async (_, args) => {
         try {
-          const { id, name, color } = args.input;
-          let result = await CharacterModel.findByIdAndUpdate({_id: id}, {name, color}, {new: true})
+          const { id, character_name, character_color } = args.input;
+          let result = await CharacterModel.findByIdAndUpdate({_id: id}, {character_name, character_color}, {useFindAndModify: false, new: true})
           return serialize(result);
         } catch (e) {
           console.error(e)

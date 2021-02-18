@@ -1,37 +1,34 @@
 const PostgresQLRouter = require("./postgresql-router")
 const xss = require('xss')
 const PostgresQLServices = {
-    getAll: async db => {
+    getAll: async (db, userid) => {
         try {
-            let characters = await db.select('*').from('characters');
-            return characters.map( character => serialize(character) )
+            let characters = await db.raw(`SELECT * FROM characters WHERE userid='${userid}'`);
+            return characters.rows.map( character => serialize(character) )
         } catch (e) {
             return "error"
         }
     },
     insertOne: async (db, obj) => {
         try {
-            let result = await db.insert(obj).into('characters');
-            let characters = result ? await db.select('*').from('characters') : [] ;
-            return characters.map( character => serialize(character) )
+            let character = await db.insert(obj).into('characters').returning('*');
+            return serialize(character[0]);
         } catch (e) {
             console.error(e)
         }
     },
     deleteOne: async (db, id) => {
         let int = parseInt(id, 10)
-        let result = await db.raw(`DELETE FROM characters WHERE id=${int}`);
-        let characters = result ? await db.select('*').from('characters') : [] ;
-        return characters;
+        let character = await db.raw(`DELETE FROM characters WHERE id=${int}`);
+        return serialize(character);
     },
     updateOne: async (db, obj) => {
         const { id, character_name, character_color } = obj;
-        let result = await db.raw(`UPDATE characters SET character_name='${character_name}', character_color='${character_color}' WHERE id=${id}`)
-        let characters = result ? await db.select('*').from('characters') : [] ;
-        return characters;
+        let character = await db.raw(`UPDATE characters SET character_name='${character_name}', character_color='${character_color}' WHERE id=${id}`)
+        return serialize(character);
     },
-    deleteAll: async db => {
-        let result = await db.truncate('characters');
+    deleteAll: async (db, userid)=> {
+        let result = await db.raw(`DELETE FROM characters WHERE userid='${userid}'`);
         let characters = result ? await db.select('*').from('characters') : [] ;
         return characters;
     }

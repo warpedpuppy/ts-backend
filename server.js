@@ -17,7 +17,7 @@ const PostgresQLRouter = require('./database/postresql/postgresql-router');
 
 
 app.use('/mongo-restful', MongoRestfulRouter);
-app.use('/postresql-restful', PostgresQLRouter);
+app.use('/postgresql-restful', PostgresQLRouter);
 
 
 startMongo();
