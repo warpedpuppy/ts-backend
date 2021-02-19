@@ -8,7 +8,6 @@ MongoRestfulRouter
 .get('/:userid', async (req, res) => {
     try {
         let characters =  await MongoRestfulServices.getAll(req.params.userid);
-        console.log(characters)
         res.status(200).json(characters)
     } catch (e) {
         res.status(500).json({success: false})
@@ -24,6 +23,7 @@ MongoRestfulRouter
   
 })
 .put('/', async (req, res) => {
+    console.log('put', req.body)
     try {
         let result = await MongoRestfulServices.updateOne(req.body);
         let result2 = result ? await MongoRestfulServices.getAll() : [];
@@ -34,7 +34,6 @@ MongoRestfulRouter
   
 })
 .delete('/', async (req, res) => {
-
     try {
         let result = await MongoRestfulServices.deleteOne(req.body.id);
         let result2 = result ? await MongoRestfulServices.getAll() : [];

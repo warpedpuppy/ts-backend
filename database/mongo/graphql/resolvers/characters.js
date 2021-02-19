@@ -16,7 +16,9 @@ module.exports = {
     Query: {
       greetings: () => "hello",
       characters: async (_, args) => {
-        return await CharacterModel.find({userid: args.input.userid})}
+        let result = await CharacterModel.find( {userid: args.input.userid} );
+        return result;
+      }
     },
     Mutation: {
       createCharacter: async (_, args) => {
@@ -32,7 +34,6 @@ module.exports = {
         try {
           const { id } = args.input;
           let result = await CharacterModel.deleteOne({_id: id})
-          console.log(result)
           return result.deletedCount > 0 ? true : false;
         } catch (e) {
           console.error(e)

@@ -4,14 +4,15 @@ const PostgresQLServices = require('./postgresql-services');
 PostgresQLRouter
 .get('/:userid', async (req, res) => {
     try {
-        let result = await PostgresQLServices.getAll(req.app.get('db'), req.params.userid)
-        res.status(200).json({success: true, result})
+        let characters = await PostgresQLServices.getAll(req.app.get('db'), req.params.userid)
+        res.status(200).json(characters)
     } catch (e) {
         console.log(e)
     }
    
 })
 .post('/', async (req, res) => {
+    console.log(req.body)
     try {
         let character = await PostgresQLServices.insertOne(req.app.get('db'), req.body)
         console.log(character)

@@ -4,7 +4,7 @@ const xss = require('xss');
 const MongoRestfulServices = { 
     getAll: async function (userid) {
         try {
-            let characters = await CharacterModel.find({userid});
+            let characters = await CharacterModel.find();
             return characters.map(character => this.serialize(character));
         } catch (e) {
             console.error(e)
@@ -19,6 +19,7 @@ const MongoRestfulServices = {
         }
     },
     deleteAll: async function (userid) {
+        console.log('userid', userid)
         try {
             let result = await CharacterModel.remove({userid})
             return result ? true : false ;
@@ -37,7 +38,7 @@ const MongoRestfulServices = {
     updateOne: async function (obj) {
         try {
             const { id, character_name, character_color } = obj;
-            let character = await CharacterModel.findByIdAndUpdate({_id: id}, {character_name, character_color}, {new: true})
+            let character = await CharacterModel.findByIdAndUpdate({_id: id}, {character_name, character_color}, {useFindAndModify: false, new: true})
             return this.serialize(character);
           } catch (e) {
             console.error(e)
@@ -46,6 +47,7 @@ const MongoRestfulServices = {
     serialize: function (obj) {
       return {
         id: obj.id,
+        userid: obj.userid,
         character_name: xss(obj.character_name),
         character_color: xss(obj.character_color),
         createdAt: xss(obj.createdAt),

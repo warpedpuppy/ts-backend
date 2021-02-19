@@ -24,8 +24,8 @@ const PostgresQLServices = {
     },
     updateOne: async (db, obj) => {
         const { id, character_name, character_color } = obj;
-        let character = await db.raw(`UPDATE characters SET character_name='${character_name}', character_color='${character_color}' WHERE id=${id}`)
-        return serialize(character);
+        let result = await db.raw(`UPDATE characters SET character_name='${character_name}', character_color='${character_color}' WHERE id='${id}'`);
+        return result.rowCount === 1 ? serialize(obj) : {};
     },
     deleteAll: async (db, userid)=> {
         let result = await db.raw(`DELETE FROM characters WHERE userid='${userid}'`);
