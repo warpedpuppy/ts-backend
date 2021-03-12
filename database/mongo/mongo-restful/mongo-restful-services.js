@@ -4,22 +4,23 @@ const xss = require('xss');
 const MongoRestfulServices = { 
     getAll: async function (userid) {
         try {
-            let characters = await CharacterModel.find();
-            return characters.map(character => this.serialize(character));
+            let query = `db.characters.find({userid:${userid}})`;
+            let characters = await CharacterModel.find({userid});
+            return {query, characters: characters.map(character => this.serialize(character))};
         } catch (e) {
             console.error(e)
         }
     },
     create: async function (obj) {
         try {
+            let query = `db.characters.insert(${obj})`;
             let character = await CharacterModel.create(obj);
-            return this.serialize(character);
+            return {query, character: this.serialize(character)};
         } catch (e) {
             console.error(e)
         }
     },
     deleteAll: async function (userid) {
-        console.log('userid', userid)
         try {
             let result = await CharacterModel.remove({userid})
             return result ? true : false ;
@@ -29,8 +30,9 @@ const MongoRestfulServices = {
     },
     deleteOne: async function (id) {
         try {
+            let query = `db.collection.deleteOne({_id:${id}})`;
             let character = await CharacterModel.deleteOne({_id: id})
-            return this.serialize(character);
+            return {query, character: this.serialize(character)};
         } catch (e) {
             console.error(e)
         }
@@ -38,8 +40,9 @@ const MongoRestfulServices = {
     updateOne: async function (obj) {
         try {
             const { id, character_name, character_color } = obj;
+            let query = `db.characters.updateOne({_id: ${id}}, {${character_name}, ${character_color}}, {useFindAndModify: false, new: true})`
             let character = await CharacterModel.findByIdAndUpdate({_id: id}, {character_name, character_color}, {useFindAndModify: false, new: true})
-            return this.serialize(character);
+            return { query, character: this.serialize(character) };
           } catch (e) {
             console.error(e)
           }

@@ -7,16 +7,16 @@ MongoRestfulRouter
 })
 .get('/:userid', async (req, res) => {
     try {
-        let characters =  await MongoRestfulServices.getAll(req.params.userid);
-        res.status(200).json(characters)
+        let { query, characters } =  await MongoRestfulServices.getAll(req.params.userid);
+        res.status(200).json({ query, characters } )
     } catch (e) {
         res.status(500).json({success: false})
     }
 })
 .post('/', async (req, res) => {
     try {
-        let character = await MongoRestfulServices.create(req.body);
-        res.status(200).json(character)
+        let {character, query} = await MongoRestfulServices.create(req.body);
+        res.status(200).json({character, query})
     } catch (e) {
         res.status(500).json({success: false})
     }
@@ -35,9 +35,8 @@ MongoRestfulRouter
 })
 .delete('/', async (req, res) => {
     try {
-        let result = await MongoRestfulServices.deleteOne(req.body.id);
-        let result2 = result ? await MongoRestfulServices.getAll() : [];
-        res.status(200).json(result2)
+        let {query, character} = await MongoRestfulServices.deleteOne(req.body.id);
+        res.status(200).json({query, character})
     } catch (e) {
         res.status(500).json({success: false})
     }
