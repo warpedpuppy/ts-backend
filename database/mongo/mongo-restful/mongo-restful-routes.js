@@ -23,11 +23,9 @@ MongoRestfulRouter
   
 })
 .put('/', async (req, res) => {
-    console.log('put', req.body)
     try {
         let result = await MongoRestfulServices.updateOne(req.body);
-        let result2 = result ? await MongoRestfulServices.getAll() : [];
-        res.status(200).json(result2)
+        res.status(200).json(result)
     } catch (e) {
         res.status(500).json({success: false})
     }
