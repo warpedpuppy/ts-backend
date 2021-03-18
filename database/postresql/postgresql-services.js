@@ -10,6 +10,14 @@ const PostgresQLServices = {
             return "error"
         }
     },
+    getTotal: async (db, userid) => {
+        try {
+            let query = `SELECT COUNT(*) FROM characters`;
+            return await db.raw(query);
+        } catch (e) {
+            return "error"
+        }
+    },
     insertOne: async (db, obj) => {
         try {
             let query = `INSERT INTO characters (userid, character_name, character_color) values ('${obj.userid}', '${obj.character_name}', '${obj.character_color}') RETURNING *`;
@@ -37,6 +45,10 @@ const PostgresQLServices = {
         let result = await db.raw(query);
         let characters = result ? await db.select('*').from('characters') : [] ;
         return characters;
+    },
+    empty: async (db, userid)=> {
+        let query = `TRUNCATE characters`;
+        return await db.raw(query);
     }
 }
 function serialize(obj) {

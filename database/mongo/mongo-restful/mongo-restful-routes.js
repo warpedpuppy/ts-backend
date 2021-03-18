@@ -5,10 +5,18 @@ MongoRestfulRouter
 .get('/test', async (req, res) => {
     res.status(200).json({success: true})
 })
-.get('/:userid', async (req, res) => {
+.get('/user/:userid', async (req, res) => {
     try {
         let { query, characters } =  await MongoRestfulServices.getAll(req.params.userid);
         res.status(200).json({ query, characters } )
+    } catch (e) {
+        res.status(500).json({success: false})
+    }
+})
+.get('/complete', async (req, res) => {
+    try {
+        let result =  await MongoRestfulServices.getComplete();
+        res.status(200).json({ result } )
     } catch (e) {
         res.status(500).json({success: false})
     }
@@ -43,6 +51,15 @@ MongoRestfulRouter
 .delete('/delete-all', async (req, res) => {
     try {
         let result = await MongoRestfulServices.deleteAll(req.body.userid);
+        res.status(200).json(result)
+    } catch (e) {
+        res.status(500).json({success: false})
+    }
+  
+})
+.delete('/empty', async (req, res) => {
+    try {
+        let result = await MongoRestfulServices.empty();
         res.status(200).json(result)
     } catch (e) {
         res.status(500).json({success: false})

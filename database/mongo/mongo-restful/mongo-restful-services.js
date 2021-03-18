@@ -11,6 +11,13 @@ const MongoRestfulServices = {
             console.error(e)
         }
     },
+    getComplete: async function () {
+        try {
+            return await CharacterModel.countDocuments();
+        } catch (e) {
+            console.error(e)
+        }
+    },
     create: async function (obj) {
         try {
             let query = `db.characters.insert(${obj})`;
@@ -23,6 +30,14 @@ const MongoRestfulServices = {
     deleteAll: async function (userid) {
         try {
             let result = await CharacterModel.remove({userid})
+            return result ? true : false ;
+        } catch (e) {
+            console.error(e)
+        }
+    },
+    empty: async function (userid) {
+        try {
+            let result = await CharacterModel.remove()
             return result ? true : false ;
         } catch (e) {
             console.error(e)
