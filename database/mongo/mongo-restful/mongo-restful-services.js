@@ -29,7 +29,7 @@ const MongoRestfulServices = {
     },
     deleteAll: async function (userid) {
         try {
-            let result = await CharacterModel.remove({userid})
+            let result = await CharacterModel.deleteMany({userid})
             return result ? true : false ;
         } catch (e) {
             console.error(e)
@@ -37,7 +37,7 @@ const MongoRestfulServices = {
     },
     empty: async function (userid) {
         try {
-            let result = await CharacterModel.remove()
+            let result = await CharacterModel.deleteMany()
             return result ? true : false ;
         } catch (e) {
             console.error(e)

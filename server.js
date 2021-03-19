@@ -13,12 +13,12 @@ app.use(cors());
 
 const MongoRestfulRouter = require('./database/mongo/mongo-restful/mongo-restful-routes');
 const PostgresQLRouter = require('./database/postresql/postgresql-router');
-
+const AdminRouter = require('./admin/admin-router');
 
 
 app.use('/mongo-restful', MongoRestfulRouter);
 app.use('/postgresql-restful', PostgresQLRouter);
-
+app.use('/admin', AdminRouter);
 
 startMongo();
 let apolloServer = startGraphQL(app);

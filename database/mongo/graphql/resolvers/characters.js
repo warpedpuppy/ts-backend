@@ -50,7 +50,7 @@ module.exports = {
       },
       deleteAllCharacters: async (_, args) => {
         try {
-          let result = await CharacterModel.remove({userid: args.input.userid})
+          let result = await CharacterModel.deleteMany({userid: args.input.userid})
           return result ? true : false ;
         } catch (e) {
           console.error(e)
