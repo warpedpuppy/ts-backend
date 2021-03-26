@@ -8,7 +8,12 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+
+var corsOptions = {
+  origins: ['http://localhost:3000/', 'https://kind-montalcini-cc92fa.netlify.app']
+}
+app.use(cors(corsOptions));
 
 
 const MongoRestfulRouter = require('./database/mongo/mongo-restful/mongo-restful-routes');
@@ -24,6 +29,11 @@ startMongo();
 let apolloServer = startGraphQL(app);
 startPostgres(app);
 
+//Error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
 
 
 const PORT = process.env.PORT || 8080;

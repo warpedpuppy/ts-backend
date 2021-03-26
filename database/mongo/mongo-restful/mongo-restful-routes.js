@@ -1,6 +1,11 @@
 const express = require('express');
 const MongoRestfulRouter = express.Router();
 const MongoRestfulServices = require('./mongo-restful-services');
+
+const BruteForce = require('../../security/brute-force');
+let bruteforce = BruteForce('mongo');
+MongoRestfulRouter.use(bruteforce);
+
 MongoRestfulRouter
 .get('/test', async (req, res) => {
     res.status(200).json({success: true})

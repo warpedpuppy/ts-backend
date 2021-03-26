@@ -1,6 +1,10 @@
 const express = require('express');
 const PostgresQLRouter = express.Router();
 const PostgresQLServices = require('./postgresql-services');
+const BruteForce = require('../security/brute-force');
+let bruteforce = BruteForce('postgresql');
+PostgresQLRouter.use(bruteforce);
+
 PostgresQLRouter
 .get('/user/:userid', async (req, res) => {
     try {

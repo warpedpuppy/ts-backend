@@ -15,15 +15,20 @@
     },
     "dependencies": {
         "apollo-server-express": "^2.9.3",
+        "brute-knex": "^4.0.1",
         "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "express-brute": "^1.0.1",
+        "express-brute-mongoose": "^1.1.0",
         "helmet": "^4.2.0",
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.21.17",
+        "moment": "^2.29.1",
         "mongodb": "^3.6.3",
         "mongoose": "^5.10.18",
         "pg": "^8.5.1",
+        "sqlite3": "^5.0.2",
         "uuid": "^8.3.1"
     }
 }
