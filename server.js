@@ -9,11 +9,10 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
+let origins = process.env.ENVELOPE === 'local' ? ['http://localhost:3000/', process.env.FRONT_END_URL] : [process.env.FRONT_END_URL] ;
 
-var corsOptions = {
-  origins: ['http://localhost:3000/', 'https://kind-montalcini-cc92fa.netlify.app']
-}
-app.use(cors(corsOptions));
+
+app.use(cors({ origins }));
 
 
 const MongoRestfulRouter = require('./database/mongo/mongo-restful/mongo-restful-routes');
