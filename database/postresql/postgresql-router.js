@@ -42,6 +42,7 @@ PostgresQLRouter
     }
 })
 .delete('/', async (req, res) => {
+    console.log(req.body)
     try {
         let { query, character } = await PostgresQLServices.deleteOne(req.app.get('db'), req.body.id)
         res.status(200).json({success: true, character, query})
