@@ -1,8 +1,10 @@
 const ExpressBrute = require("express-brute");
 const BruteKnex = require('brute-knex');
+const MemcachedStore = require('express-brute-memcached');
 const MongooseStore = require("express-brute-mongoose");
 const mongoose = require("mongoose");
-const moment = require('moment')
+const moment = require('moment');
+const store;
 const BruteForceSchema = mongoose.Schema({
     "_id": String,
     "data": {
