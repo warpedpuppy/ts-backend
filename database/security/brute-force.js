@@ -4,7 +4,7 @@ const MemcachedStore = require('express-brute-memcached');
 const MongooseStore = require("express-brute-mongoose");
 const mongoose = require("mongoose");
 const moment = require('moment');
-const store;
+let store;
 const BruteForceSchema = mongoose.Schema({
     "_id": String,
     "data": {
