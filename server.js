@@ -15,7 +15,7 @@ app.use(express.json());
 // app.use(cors({ origins }));
 
 
-let allowedOrigins = [ 'http://localhost:3000', 'https://tugtug.com','http://localhost:3001','http://localhost:8000', 'https://www.tryingsomething.com/', 'https://tryingsomething.com/', 'https://kind-montalcini-cc92fa.netlify.app' ];
+let allowedOrigins = [ 'http://localhost:3000', 'https://tugtug.com','http://localhost:3001','http://localhost:8000', 'https://www.tryingsomething.com', 'https://tryingsomething.com', 'https://kind-montalcini-cc92fa.netlify.app' ];
 
 app.use(cors({
   origin: (origin, callback) => {
