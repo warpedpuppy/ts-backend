@@ -9,10 +9,24 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 
-let origins = process.env.ENVELOPE === 'local' ? ['http://localhost:3000/', process.env.FRONT_END_URL] : [process.env.FRONT_END_URL] ;
+// let origins = process.env.ENVELOPE === 'local' ? ['http://localhost:3000/', process.env.FRONT_END_URL] : [process.env.FRONT_END_URL] ;
 
 
-app.use(cors({ origins }));
+// app.use(cors({ origins }));
+
+
+let allowedOrigins = [ 'http://localhost:3000', 'https://tugtug.com','http://localhost:3001','http://localhost:8000', 'https://www.tryingsomething.com/', 'https://tryingsomething.com/', 'https://kind-montalcini-cc92fa.netlify.app' ];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
 
 
 const MongoRestfulRouter = require('./database/mongo/mongo-restful/mongo-restful-routes');
