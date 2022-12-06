@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const knex = require('knex')
 // const Config = require('../../config');
 // const CharacterModel = require('../models/characterModel');
 // const uuid = require('uuid');
@@ -39,7 +40,7 @@ async function startMongo () {
 function startPostgres (app) {
   try {
     let postgres_connection = process.env.ENVELOPE === 'local' ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_REMOTE;
-    // const knex = require('knex')
+    // 
     // const db = knex({
     //   client: 'pg',
     //   connection: postgres_connection,
