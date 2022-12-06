@@ -16,7 +16,6 @@
         "nodemon": "^2.0.20"
     },
     "dependencies": {
-        "better-sqlite3": "^8.0.1",
         "bisection": "^0.0.3",
         "bluebird": "^3.7.2",
         "brute-knex": "^4.0.1",
@@ -32,17 +31,11 @@
         "moment": "^2.29.4",
         "mongodb": "^4.12.1",
         "mongoose": "^6.8.0",
-        "mysql": "^2.18.1",
-        "mysql2": "^2.3.3",
-        "netlify-lambda": "^1.6.3",
-        "oracledb": "^5.5.0",
         "pg": "^8.8.0",
-        "pg-native": "^3.0.1",
-        "pg-query-stream": "^4.2.4",
         "serverless-http": "^3.1.0",
         "sqlite3": "^5.1.2",
-        "tedious": "^15.1.2",
         "uuid": "^9.0.0",
-        "xss": "^1.0.14"
+        "xss": "^1.0.14",
+		"netlify-lambda": "^1.6.3"
     }
 }
