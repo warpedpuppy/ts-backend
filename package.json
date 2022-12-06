@@ -39,6 +39,7 @@
         "pg-query-stream": "^4.2.4",
         "serverless-http": "^3.1.0",
         "sqlite3": "^5.1.2",
+        "tedious": "^15.1.2",
         "uuid": "^9.0.0",
         "xss": "^1.0.14"
     }
