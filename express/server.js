@@ -19,7 +19,7 @@ app.use(`${API_ROOT}/postgresql-restful`, PostgresQLRouter);
 app.use(`${API_ROOT}/admin`, AdminRouter);
 
 startMongo();
-let apolloServer = startGraphQL(app);
+// let apolloServer = startGraphQL(app);
 startPostgres(app);
 
 app.use((err, req, res, next) => {
