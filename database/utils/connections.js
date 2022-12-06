@@ -59,5 +59,5 @@ function startPostgres (app) {
 //       }
 //   }
 }
-// startGraphQL, startPostgres
-module.exports = { startMongo  }
+// startGraphQL
+module.exports = { startMongo, startPostgres  }
