@@ -20,7 +20,7 @@ app.use(`${API_ROOT}/mongo-restful`, MongoRestfulRouter);
 
 startMongo();
 // let apolloServer = startGraphQL(app);
-// startPostgres(app);
+startPostgres(app);
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
