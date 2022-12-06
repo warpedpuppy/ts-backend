@@ -8,8 +8,8 @@ app.use(express.json());
 require('../cors')(app);
 
 // const mongoose = require('mongoose');
-// startGraphQL,,  startPostgres
-const  { startMongo } = require('../database/utils/connections');
+// startGraphQL,
+const  { startMongo,  startPostgres } = require('../database/utils/connections');
 
 const MongoRestfulRouter = require('../database/mongo/mongo-restful/mongo-restful-routes');
 // const PostgresQLRouter = require('../database/postresql/postgresql-router');
