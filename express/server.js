@@ -8,8 +8,8 @@ app.use(express.json());
 require('../cors')(app);
 
 // const mongoose = require('mongoose');
-// startGraphQL,
-const  { startMongo,  startPostgres } = require('../database/utils/connections');
+// startGraphQL,,  startPostgres
+const  { startMongo } = require('../database/utils/connections');
 
 const MongoRestfulRouter = require('../database/mongo/mongo-restful/mongo-restful-routes');
 // const PostgresQLRouter = require('../database/postresql/postgresql-router');
@@ -20,20 +20,12 @@ app.use(`${API_ROOT}/mongo-restful`, MongoRestfulRouter);
 
 startMongo();
 // let apolloServer = startGraphQL(app);
-startPostgres(app);
+// startPostgres(app);
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);
 	res.status(500).send("Something broke!");
 });
-  
-
-// const MOVIE_ROUTER = require('../movies/movie-router');
-// const USERS_ROUTER = require('../users/users-router');
-
-
-// app.use(`${API_ROOT}/movies`, MOVIE_ROUTER);  
-// app.use(`${API_ROOT}/users`, USERS_ROUTER);  
 
 module.exports = app;
 module.exports.handler = serverless(app);
