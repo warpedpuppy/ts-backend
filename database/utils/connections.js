@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const knex = require('knex');
+// const knex = require('knex');
 const knexServerlessMysql = require('knex-serverless-mysql');
 // const Config = require('../../config');
 // const CharacterModel = require('../models/characterModel');
