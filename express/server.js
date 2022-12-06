@@ -7,7 +7,7 @@ app.use(express.json());
 
 require('../cors')(app);
 
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // startGraphQL,
 const  { startMongo,  startPostgres } = require('../database/utils/connections');
 
@@ -16,12 +16,11 @@ const MongoRestfulRouter = require('../database/mongo/mongo-restful/mongo-restfu
 // const AdminRouter = require('../admin/admin-router');
 
 app.use(`${API_ROOT}/mongo-restful`, MongoRestfulRouter);
-// app.use(`${API_ROOT}/postgresql-restful`, PostgresQLRouter);
-// app.use(`${API_ROOT}/admin`, AdminRouter);
+
 
 startMongo();
 // let apolloServer = startGraphQL(app);
-startPostgres(app);
+// startPostgres(app);
 
 app.use((err, req, res, next) => {
 	console.error(err.stack);

@@ -36,28 +36,28 @@ async function startMongo () {
 
 
 //POSTGRESQL
-function startPostgres (app) {
-  try {
-    let postgres_connection = process.env.ENVELOPE === 'local' ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_REMOTE;
-    const knex = require('knex')
-    const db = knex({
-      client: 'pg',
-      connection: postgres_connection,
-    })
+// function startPostgres (app) {
+//   try {
+//     let postgres_connection = process.env.ENVELOPE === 'local' ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_REMOTE;
+//     const knex = require('knex')
+//     const db = knex({
+//       client: 'pg',
+//       connection: postgres_connection,
+//     })
 
-    if (process.env.ENVELOPE === 'local') {
-      console.log(`connected to local posgresql db`)
-    } else {
-      console.log(`connected to remote posgresql db`)
-    }
-    app.set('db', db)
-  } catch (e) {
-      if (process.env.ENVELOPE === 'local') {
-        console.log(`problem connecting to local posgresql db`)
-      } else {
-        console.log(`problem connecting to remote posgresql db`)
-      }
-  }
-}
-// startGraphQL,
-module.exports = { startMongo,  startPostgres }
+//     if (process.env.ENVELOPE === 'local') {
+//       console.log(`connected to local posgresql db`)
+//     } else {
+//       console.log(`connected to remote posgresql db`)
+//     }
+//     app.set('db', db)
+//   } catch (e) {
+//       if (process.env.ENVELOPE === 'local') {
+//         console.log(`problem connecting to local posgresql db`)
+//       } else {
+//         console.log(`problem connecting to remote posgresql db`)
+//       }
+//   }
+// }
+// startGraphQL,startPostgres
+module.exports = { startMongo  }
