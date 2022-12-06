@@ -16,7 +16,6 @@
         "nodemon": "^2.0.6"
     },
     "dependencies": {
-        "apollo-server-express": "^2.9.3",
         "bisection": "^0.0.3",
         "brute-knex": "^4.0.1",
         "cors": "^2.8.5",
@@ -25,7 +24,6 @@
         "express-brute": "^1.0.1",
         "express-brute-memcached": "^0.0.1",
         "express-brute-mongoose": "^1.1.0",
-        "graphql": "^15.4.0",
         "helmet": "^4.2.0",
         "jsonwebtoken": "^8.5.1",
         "knex": "^0.21.17",
