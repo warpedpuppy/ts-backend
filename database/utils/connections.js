@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 // const Config = require('../../config');
 // const CharacterModel = require('../models/characterModel');
 // const uuid = require('uuid');
-  const { ApolloServer } = require('apollo-server-express');
-  const typeDefs = require('../mongo/graphql/typeDefs');
-  const resolvers = require('../mongo/graphql/resolvers');
+//   const { ApolloServer } = require('apollo-server-express');
+//   const typeDefs = require('../mongo/graphql/typeDefs');
+//   const resolvers = require('../mongo/graphql/resolvers');
 
 
 //MONGODB
@@ -23,14 +23,14 @@ async function startMongo () {
 
 
 //GRAPHQL
-function startGraphQL (app) {
-  const apolloServer = new ApolloServer({
-  typeDefs,
-  resolvers
-});
-apolloServer.applyMiddleware({ app, path: '/graphql' });
-return apolloServer;
-}
+// function startGraphQL (app) {
+//   const apolloServer = new ApolloServer({
+//   typeDefs,
+//   resolvers
+// });
+// apolloServer.applyMiddleware({ app, path: '/graphql' });
+// return apolloServer;
+// }
 
 
 
@@ -59,5 +59,5 @@ function startPostgres (app) {
       }
   }
 }
-
-module.exports = { startMongo, startGraphQL, startPostgres }
+// startGraphQL,
+module.exports = { startMongo,  startPostgres }
