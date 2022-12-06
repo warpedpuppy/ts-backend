@@ -16,6 +16,7 @@
         "nodemon": "^2.0.20"
     },
     "dependencies": {
+        "better-sqlite3": "^8.0.1",
         "bisection": "^0.0.3",
         "bluebird": "^3.7.2",
         "brute-knex": "^4.0.1",
