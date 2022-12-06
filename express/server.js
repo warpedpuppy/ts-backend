@@ -12,12 +12,12 @@ const mongoose = require('mongoose');
 const  { startMongo,  startPostgres } = require('../database/utils/connections');
 
 const MongoRestfulRouter = require('../database/mongo/mongo-restful/mongo-restful-routes');
-const PostgresQLRouter = require('../database/postresql/postgresql-router');
-const AdminRouter = require('../admin/admin-router');
+// const PostgresQLRouter = require('../database/postresql/postgresql-router');
+// const AdminRouter = require('../admin/admin-router');
 
 app.use(`${API_ROOT}/mongo-restful`, MongoRestfulRouter);
-app.use(`${API_ROOT}/postgresql-restful`, PostgresQLRouter);
-app.use(`${API_ROOT}/admin`, AdminRouter);
+// app.use(`${API_ROOT}/postgresql-restful`, PostgresQLRouter);
+// app.use(`${API_ROOT}/admin`, AdminRouter);
 
 startMongo();
 // let apolloServer = startGraphQL(app);
