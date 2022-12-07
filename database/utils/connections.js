@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 // const knex = require('knex');
-const knexServerlessMysql = require('knex-serverless-mysql');
+// const knexServerlessMysql = require('knex-serverless-mysql');
 // const Config = require('../../config');
 // const CharacterModel = require('../models/characterModel');
 // const uuid = require('uuid');
@@ -8,6 +8,19 @@ const knexServerlessMysql = require('knex-serverless-mysql');
 //   const typeDefs = require('../mongo/graphql/typeDefs');
 //   const resolvers = require('../mongo/graphql/resolvers');
 
+try {
+	const knex = require('knex');
+} catch(e) {
+	console.log("*****************")
+	console.log("*****************")
+	console.log("*****************")
+	console.error(e)
+	console.log("*****************")
+	console.log("*****************")
+	console.log("*****************")
+	console.log("*****************")
+
+}
 
 //MONGODB
 async function startMongo () {
