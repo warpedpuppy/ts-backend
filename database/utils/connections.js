@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 //   const resolvers = require('../mongo/graphql/resolvers');
 
 try {
-	const knex = require('knex');
+	// const knex = require('knex');
 } catch(e) {
 	console.log("*****************")
 	console.log("*****************")
