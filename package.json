@@ -15,6 +15,7 @@
     },
     "dependencies": {
         "apollo-server-express": "^2.9.3",
+        "bcryptjs": "^2.4.3",
         "bisection": "^0.0.3",
         "brute-knex": "^4.0.1",
         "cors": "^2.8.5",
@@ -30,7 +31,7 @@
         "moment": "^2.29.1",
         "mongodb": "^3.6.3",
         "mongoose": "^5.10.18",
-        "pg": "^8.5.1",
+        "pg": "^8.8.0",
         "sqlite3": "^5.0.2",
         "uuid": "^8.3.1"
     }
