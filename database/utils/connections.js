@@ -36,14 +36,24 @@ return apolloServer;
 
 
 //POSTGRESQL
-function startPostgres (app) {
+async function startPostgres (app) {
   try {
-    let postgres_connection = process.env.ENVELOPE === 'local' ? process.env.POSTGRES_LOCAL : process.env.POSTGRES_REMOTE;
+    // let postgres_connection = process.env.POSTGRES_REMOTE;
     const knex = require('knex')
-    const db = knex({
-      client: 'pg',
-      connection: postgres_connection,
-    })
+    // const db = knex({
+    //   client: 'pg',
+    //   connection: postgres_connection,
+    // })
+
+	const knexConfig = {
+		client: 'pg',
+		connection: {
+		    host : process.env.POSTGRES_HOST,
+			user : process.env.POSTGRES_USER,
+			password : process.env.POSTGRES_PASSWORD,
+		}
+	  };
+	let db = knex(knexConfig)
 
     if (process.env.ENVELOPE === 'local') {
       console.log(`connected to local posgresql db`)
@@ -52,6 +62,7 @@ function startPostgres (app) {
     }
     app.set('db', db)
   } catch (e) {
+	console.log('problem', e)
       if (process.env.ENVELOPE === 'local') {
         console.log(`problem connecting to local posgresql db`)
       } else {
