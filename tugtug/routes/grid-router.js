@@ -15,6 +15,7 @@ gridsRouter
 
   gridsRouter
   .get('/get-grid-ids', (req, res) => {
+	console.log('get grid ids hit')
     GridService.getIDS(req.app.get('db'))
     .then ( ids => {
       res

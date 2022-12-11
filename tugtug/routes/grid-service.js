@@ -3,8 +3,10 @@ const xss = require('xss')
 
 const GridService = {
   getIDS: async function (db) {
+	console.log(db)
 	try {
 		let result = await db.raw('SELECT id FROM maze_data LIMIT 5')
+		
 		return result.rows;
 	} catch (e) {
 		return e;
