@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const mongoose = require('mongoose');
-const  { startMongo, startGraphQL, startPostgres, startMazePostgresDB } = require('./database/utils/connections');
+const  { startMongo, startGraphQL, startPostgres } = require('./database/utils/connections');
 
 
 
@@ -31,7 +31,6 @@ app.use('/api/tugtug', gridsRouter);
 startMongo();
 let apolloServer = startGraphQL(app);
 startPostgres(app);
-startMazePostgresDB(app);
 
 //Error handler
 app.use((err, req, res, next) => {

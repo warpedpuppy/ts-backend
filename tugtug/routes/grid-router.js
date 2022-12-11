@@ -15,7 +15,7 @@ gridsRouter
 
   gridsRouter
   .get('/get-grid-ids', (req, res) => {
-    GridService.getIDS(req.app.get('client'))
+    GridService.getIDS(req.app.get('db'))
     .then ( ids => {
       res
       .status(200)

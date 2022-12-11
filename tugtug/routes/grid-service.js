@@ -2,9 +2,9 @@ const bcrypt = require('bcryptjs')
 const xss = require('xss')
 
 const GridService = {
-  getIDS: async function (client) {
+  getIDS: async function (db) {
 	try {
-		let result = await client.query('SELECT id FROM maze_data LIMIT 5')
+		let result = await db.raw('SELECT id FROM maze_data LIMIT 5')
 		return result.rows;
 	} catch (e) {
 		return e;
@@ -13,18 +13,18 @@ const GridService = {
   },
   getMaze: async function (db, id) {
 	try {
-		let result = await db.query(`SELECT * FROM maze_data WHERE id='${id}'`);
+		let result = await db.raw(`SELECT * FROM maze_data WHERE id='${id}'`);
 		return result.rows
 	} catch (e) {
 		return e;
 	}
   },
   getAllMazes : async function (db) {
-    let result = await db.query('SELECT * FROM maze_data');
+    let result = await db.raw('SELECT * FROM maze_data');
     return result.rows;
   },
   deleteMaze: async function (db, id) {
-    return await db.query(`DELETE FROM maze_data WHERE id='${id}'`)
+    return await db.raw(`DELETE FROM maze_data WHERE id='${id}'`)
   },
   insertMaze: async function(db, mazeObj) {
     let walls = '{';
@@ -53,7 +53,7 @@ const GridService = {
       '${walls}', 
       '${mazeObj['c']}', 
       '${mazeObj['r']}')`;
-    let result = await db.query(query);
+    let result = await db.raw(query);
     return result.rows;
   }
 

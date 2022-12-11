@@ -5,8 +5,8 @@ let allowedOrigins = [ 'http://localhost:3000', 'https://tugtug.com','http://loc
 module.exports = app => {
 	app.use(cors({
 		origin: (origin, callback) => {
-			console.log("lets test origin", origin)
-			console.log("allowedOrigins.indexOf(origin)", allowedOrigins.indexOf(origin))
+			// console.log("lets test origin", origin)
+			// console.log("allowedOrigins.indexOf(origin)", allowedOrigins.indexOf(origin))
 			if(!origin) return callback(null, true);
 			if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
 			let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;

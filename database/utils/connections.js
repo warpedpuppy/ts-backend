@@ -61,16 +61,4 @@ function startPostgres (app) {
 }
 
 
-function startMazePostgresDB(app) {
-	const { Client } = require('pg');
-	const client = new Client({
-	connectionString: process.env.HEROKU_POSTGRESQL_ONYX_URL,
-	ssl: {
-		rejectUnauthorized: false
-	}
-	});
-	client.connect();
-	app.set('client', client)
-}
-
-module.exports = { startMongo, startGraphQL, startPostgres, startMazePostgresDB }
+module.exports = { startMongo, startGraphQL, startPostgres }
