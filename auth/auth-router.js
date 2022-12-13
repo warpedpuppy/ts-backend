@@ -3,7 +3,7 @@ const AuthService = require('./auth-service');
 const bcrypt = require('bcryptjs');
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
-const Config = require('../src/config');
+const Config = require('../config');
 
 authRouter
     .post('/show-login-form', jsonBodyParser, (req, res, next) => {
@@ -19,15 +19,15 @@ authRouter
     })
     .post('/login', jsonBodyParser, (req, res, next) => {
 
-    const { password } = req.body;
-  
-    if (password === process.env.ADMIN_PASSWORD) {
-        res.json({
-            authToken: AuthService.createJwt("SVhsdvNASBVDN", {teashdgkJAHGDSst: 2347283742})
-        })
-    } else {
-        res.json({success: false})
-    }
+		const { password } = req.body;
+	
+		if (password === process.env.ADMIN_PASSWORD) {
+			res.json({
+				authToken: AuthService.createJwt("SVhsdvNASBVDN", {teashdgkJAHGDSst: 2347283742})
+			})
+		} else {
+			res.json({success: false})
+		}
  
     })
 

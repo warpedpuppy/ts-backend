@@ -16,13 +16,13 @@ const MongoRestfulRouter = require('./database/mongo/mongo-restful/mongo-restful
 const PostgresQLRouter = require('./database/postresql/postgresql-router');
 const AdminRouter = require('./admin/admin-router');
 const gridsRouter = require('./tugtug/routes/grid-router');
-
+const authRouter = require('./auth/auth-router');
 
 app.use('/mongo-restful', MongoRestfulRouter);
 app.use('/postgresql-restful', PostgresQLRouter);
 app.use('/admin', AdminRouter);
 app.use('/api/tugtug', gridsRouter);
-
+app.use('/auth', authRouter);
 
 
 

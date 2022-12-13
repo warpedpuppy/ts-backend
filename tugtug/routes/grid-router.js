@@ -45,9 +45,10 @@ gridsRouter
     })
     
   })
-requireAuth, 
+ 
   gridsRouter
-  .post('/new-maze', jsonBodyParser, (req, res) => {
+  .post('/new-maze', requireAuth, jsonBodyParser, (req, res) => {
+	console.log('enter new maze', req.body.data)
     GridService.insertMaze(req.app.get('db'), req.body.data)
     .then( item => {
       res
@@ -62,19 +63,13 @@ requireAuth,
   })
 
 gridsRouter
-  .get('/all-mazes', (req, res) => {
+  .get('/all-mazes', async (req, res) => {
     try {
-        GridService.getAllMazes(req.app.get('db'))
-        .then( mazes => {
-          res
-          .status(200)
-          .json({mazes})
-        })
-    .catch( error => {console.error(error)})
+        let mazes = await GridService.getAllMazes(req.app.get('db'))
+		res.status(200).json({mazes})
     } catch (e) {
-      console.log("here error")
+		res.status(500).json({e})
     }
-   
   })
 
   gridsRouter

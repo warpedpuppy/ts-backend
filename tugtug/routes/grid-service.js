@@ -27,6 +27,7 @@ const GridService = {
     return await db.raw(`DELETE FROM maze_data WHERE id='${id}'`)
   },
   insertMaze: async function(db, mazeObj) {
+
     let walls = '{';
     mazeObj['walls'].forEach( (item, index) => {
         walls +=  `{${item[0]}, ${item[1]}}`;
@@ -44,16 +45,20 @@ const GridService = {
     //     r: mazeObj['r']
     // }
     //console.log("insert object from insert maze in grid service", insertObj)
-    let query = `INSERT INTO maze_data (hero, token1, token2, token3, token4, walls, c, r) VALUES (
+	 //   '{${mazeObj['token1'][0]}, ${mazeObj['token1'][1]}}', 
+    //   '{${mazeObj['token2'][0]}, ${mazeObj['token2'][1]}}', 
+    //   '{${mazeObj['token3'][0]}, ${mazeObj['token3'][1]}}', 
+    //   '{${mazeObj['token4'][0]}, ${mazeObj['token4'][1]}}', 
+	//token1, token2, token3, token4, 
+	console.log("query: ")
+    let query = `INSERT INTO maze_data (hero, walls, c, r) VALUES (
       '{${mazeObj['hero'][0]}, ${mazeObj['hero'][1]}}', 
-      '{${mazeObj['token1'][0]}, ${mazeObj['token1'][1]}}', 
-      '{${mazeObj['token2'][0]}, ${mazeObj['token2'][1]}}', 
-      '{${mazeObj['token3'][0]}, ${mazeObj['token3'][1]}}', 
-      '{${mazeObj['token4'][0]}, ${mazeObj['token4'][1]}}', 
       '${walls}', 
       '${mazeObj['c']}', 
       '${mazeObj['r']}')`;
+	console.log('query = ', query, db.raw)
     let result = await db.raw(query);
+	console.log('result = ', result)
     return result.rows;
   }
 
